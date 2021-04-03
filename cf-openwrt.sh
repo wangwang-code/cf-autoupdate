@@ -124,10 +124,10 @@ do
 		for i in `cat ip.txt`
 		do
 			echo $i 启动测速
-			curl --resolve $domain:443:$i https://$domain/$file -o temp/$i -s --connect-timeout 2 -m 10&
+			curl --connect-timeout 2 --max-time 10 --resolve $domain:443:$i https://$domain/$file -o temp/$i -s &
 		done
 		echo 等待测速进程结束,筛选出三个优选的IP
-		sleep 15
+		sleep 600
 		echo 测速完成
 		ls -S temp > ip.txt
 		rm -rf temp
